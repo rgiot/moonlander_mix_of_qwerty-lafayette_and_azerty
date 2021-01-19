@@ -3,5 +3,6 @@
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 AUTO_SHIFT_ENABLE = yes
+UNICODE_ENABLE = yes
 SRC = matrix.c 
 EXTRAFLAGS+=--specs=nosys.specs
