@@ -3,4 +3,5 @@
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 AUTO_SHIFT_ENABLE = yes
-SRC = matrix.c
+SRC = matrix.c 
+EXTRAFLAGS+=--specs=nosys.specs
