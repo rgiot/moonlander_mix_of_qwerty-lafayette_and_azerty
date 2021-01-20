@@ -52,26 +52,50 @@ enum custom_keycodes {
 };
 
 
-
+enum layer_semantic {
+  L_BASE,
+  L_SHIFT,
+  L_CAPS,
+  L_EXTRA,
+  L_CAPS_EXTRA,
+  L_ALTGR,
+  L_SYMBOLS,
+  L_MEDIA
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_moonlander(
-    KC_GRAVE,       FR_1,           FR_2,           FR_3,           FR_4,           FR_5,           TG(5),                                          KC_EQUAL,       FR_6,           FR_7,           FR_8,           FR_9,           FR_0,           FR_MINS,        
+  // Standard layout
+  [L_BASE] = LAYOUT_moonlander(
+    KC_GRAVE,       FR_1,           FR_2,           FR_3,           FR_4,           FR_5,           TG(L_SYMBOLS),                                  KC_EQUAL,       FR_6,           FR_7,           FR_8,           FR_9,           FR_0,           FR_MINS,        
     KC_TAB,         FR_A,           FR_Z,           KC_E,           KC_R,           KC_T,           FR_CCIRC,                                       FR_UMLT,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           FR_BSLS,        
-    TG(1),          FR_Q,           KC_S,           KC_D,           KC_F,           KC_G,           KC_LSHIFT,                                                                      KC_TRANSPARENT, KC_H,           KC_J,           KC_K,           KC_L,           FR_M,           FR_APOS,        
-    LM(1,KC_NO),    FR_W,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           OSL(2),         FR_COMM,        FR_DOT,         FR_SLSH,        LM(1,KC_NO),    
+    TG(L_CAPS),    FR_Q,           KC_S,           KC_D,           KC_F,           KC_G,           KC_LSHIFT,                                                                      KC_TRANSPARENT, KC_H,           KC_J,           KC_K,           KC_L,           FR_M,           FR_APOS,        
+    LM(L_SHIFT, LSFT(KC_NO)),    FR_W,    KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           OSL(L_EXTRA),   FR_COMM,        FR_DOT,         FR_SLSH,        LM(L_SHIFT, RSFT(KC_NO)),    
     KC_LCTRL,       KC_LGUI,        KC_LALT,        KC_LEFT,        KC_RIGHT,       LALT_T(KC_APPLICATION),                                                                                                LCTL_T(KC_ESCAPE),KC_UP,          KC_DOWN,        FR_LCBR,        FR_RCBR,        KC_RCTRL,       
     KC_SPACE,       KC_BSPACE,      KC_DELETE,                      TT(4),          KC_TAB,         KC_ENTER
   ),
-  [1] = LAYOUT_moonlander(
+
+  // Keys with shift
+  [L_SHIFT] = LAYOUT_moonlander(
     FR_TILD,        FR_EXLM,        FR_AT,          FR_HASH,        FR_DLR,         FR_PERC,        KC_TRANSPARENT,                                 FR_PLUS,        FR_CIRC,        FR_AMP,         FR_ASTR,        FR_LPRN,        FR_RPRN,        FR_UNDS,        
     LSFT(KC_TAB),   LSFT(FR_A),     LSFT(FR_Z),     LSFT(KC_E),     LSFT(KC_R),     LSFT(KC_T),     RALT(FR_W),                                     RALT(KC_X),     LSFT(KC_Y),     LSFT(KC_U),     LSFT(KC_I),     LSFT(KC_O),     LSFT(KC_P),     FR_PIPE,        
     KC_TRANSPARENT, LSFT(FR_Q),     LSFT(KC_S),     LSFT(KC_D),     LSFT(KC_F),     LSFT(KC_G),     KC_TRANSPARENT,                                                                 KC_TRANSPARENT, LSFT(KC_H),     LSFT(KC_J),     LSFT(KC_K),     LSFT(KC_L),     LSFT(FR_M),     FR_DQUO,        
-    KC_TRANSPARENT, LSFT(FR_W),     LSFT(KC_X),     LSFT(KC_C),     LSFT(KC_V),     LSFT(KC_B),                                     LSFT(KC_N),     OSL(3),         FR_SCLN,        FR_COLN,        FR_QUES,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, LSFT(FR_W),     LSFT(KC_X),     LSFT(KC_C),     LSFT(KC_V),     LSFT(KC_B),                                     LSFT(KC_N),     OSL(L_CAPS_EXTRA),         FR_SCLN,        FR_COLN,        FR_QUES,        KC_TRANSPARENT, 
     LSFT(KC_LCTRL), LSFT(KC_LGUI),  LSFT(KC_LALT),  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    UC(0x20),     KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+    KC_SPACE,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [2] = LAYOUT_moonlander(
+
+  // Caps layer is not exactly as shift layer as it makes a normal space instead of a non breakable one and it does not impact the numbers (i.e. the first row) and some punctuated stuff
+    [L_CAPS] = LAYOUT_moonlander(
+    KC_GRAVE,       FR_1,           FR_2,           FR_3,           FR_4,           FR_5,           TG(L_SYMBOLS),                                          KC_EQUAL,       FR_6,           FR_7,           FR_8,           FR_9,           FR_0,           FR_MINS,        
+    LSFT(KC_TAB),   LSFT(FR_A),     LSFT(FR_Z),     LSFT(KC_E),     LSFT(KC_R),     LSFT(KC_T),     FR_CCIRC  ,                                     FR_UMLT,        LSFT(KC_Y),     LSFT(KC_U),     LSFT(KC_I),     LSFT(KC_O),     LSFT(KC_P),     FR_PIPE,        
+    KC_TRANSPARENT, LSFT(FR_Q),     LSFT(KC_S),     LSFT(KC_D),     LSFT(KC_F),     LSFT(KC_G),     KC_TRANSPARENT,                                                                 KC_TRANSPARENT, LSFT(KC_H),     LSFT(KC_J),     LSFT(KC_K),     LSFT(KC_L),     LSFT(FR_M),     FR_DQUO,        
+    KC_TRANSPARENT, LSFT(FR_W),     LSFT(KC_X),     LSFT(KC_C),     LSFT(KC_V),     LSFT(KC_B),                                     LSFT(KC_N),     OSL(L_CAPS_EXTRA),         FR_COMM,        FR_DOT,         FR_SLSH,        KC_TRANSPARENT, 
+    LSFT(KC_LCTRL), LSFT(KC_LGUI),  LSFT(KC_LALT),  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_SPACE,       KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+
+  // Layer when the dead extra key is used
+  [L_EXTRA] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, FR_PND,         FR_EURO,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, FR_OVRR,        FR_UNDS,        
     KC_TRANSPARENT, FR_AGRV,        FR_EACU,        FR_EGRV,        KC_TRANSPARENT, KC_TRANSPARENT, FR_LBRC,                                        FR_RBRC,        KC_TRANSPARENT, FR_UGRV,        KC_TRANSPARENT, RALT(KC_O),     FR_SECT,        KC_TRANSPARENT, 
     KC_TRANSPARENT, RALT(FR_A),     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, RALT(KC_C),     KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       FR_MU,          KC_TRANSPARENT, 
@@ -79,7 +103,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_HOME,        KC_END,         KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_PGUP,        KC_PGDOWN,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [3] = LAYOUT_moonlander(
+
+  // Layer when caps or shift and extra key is used (need to differentiate the caps and shift case later)
+  [L_CAPS_EXTRA] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, UC(0x2260),     KC_TRANSPARENT, 
     KC_TRANSPARENT, UC(0xC0),       UC(0xC9),       UC(0xC8),       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, UC(0xd9),       KC_TRANSPARENT, UC(0x152),      KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, UC(0x00C6),     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
@@ -87,15 +113,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_HOME,        KC_END,         KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_PGUP,        KC_PGDOWN,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [4] = LAYOUT_moonlander(
+
+
+  // Altgr is pressed (insecable space is here)
+  [L_ALTGR] = LAYOUT_moonlander(
     KC_TRANSPARENT, FR_EXLM,        FR_LPRN,        FR_RPRN,        FR_APOS,        FR_DQUO,        KC_TRANSPARENT,                                 KC_HOME,        KC_PGUP,        KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_SLASH,    KC_TRANSPARENT, 
     KC_TRANSPARENT, FR_EQL,         FR_LESS,        FR_GRTR,        FR_MINS,        FR_PLUS,        KC_TRANSPARENT,                                 KC_END,         KC_PGDOWN,      KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_ASTERISK, KC_TRANSPARENT, 
     KC_TRANSPARENT, FR_LCBR,        FR_LBRC,        FR_RBRC,        FR_RCBR,        FR_SLSH,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_KP_MINUS,    KC_KP_ENTER,    
     KC_TRANSPARENT, FR_TILD,        FR_GRV,         FR_PIPE,        FR_UNDS,        FR_BSLS,                                        KC_TRANSPARENT, KC_KP_0,        FR_COMM,        FR_DOT,         KC_KP_PLUS,     KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_SYSTEM_SLEEP,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+    UC(0x20), KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
-  [5] = LAYOUT_moonlander(
+
+
+  [ L_SYMBOLS]= LAYOUT_moonlander(
     KC_ESCAPE,      KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
     KC_TRANSPARENT, KC_EXLM,        KC_AT,          KC_LCBR,        KC_RCBR,        KC_PIPE,        KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_UP,          KC_7,           KC_8,           KC_9,           KC_ASTR,        KC_F12,         
     KC_TRANSPARENT, KC_HASH,        KC_DLR,         KC_LPRN,        KC_RPRN,        KC_GRAVE,       KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_DOWN,        KC_4,           KC_5,           KC_6,           KC_KP_PLUS,     KC_TRANSPARENT, 
@@ -103,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_COMMA,       HSV_0_255_255,  HSV_86_255_128, HSV_172_255_255,RGB_MOD,                                                                                                        RGB_TOG,        KC_TRANSPARENT, KC_DOT,         KC_0,           KC_EQUAL,       KC_TRANSPARENT, 
     RGB_VAD,        RGB_VAI,        TOGGLE_LAYER_COLOR,                RGB_SLD,        RGB_HUD,        RGB_HUI
   ),
-  [6] = LAYOUT_moonlander(
+  [L_MEDIA] = LAYOUT_moonlander(
     AU_TOG,         KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, RESET,          
     MU_TOG,         KC_TRANSPARENT, KC_TRANSPARENT, KC_MS_UP,       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     MU_MOD,         KC_TRANSPARENT, KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_TRANSPARENT, KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_MEDIA_PLAY_PAUSE,
