@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FR_TILD,        FR_EXLM,        FR_AT,          FR_HASH,        FR_DLR,         FR_PERC,        KC_TRANSPARENT,                                 FR_PLUS,        FR_CIRC,        FR_AMP,         FR_ASTR,        FR_LPRN,        FR_RPRN,        FR_UNDS,        
     LSFT(KC_TAB),   LSFT(FR_A),     LSFT(FR_Z),     LSFT(KC_E),     LSFT(KC_R),     LSFT(KC_T),     RALT(FR_W),                                     RALT(KC_X),     LSFT(KC_Y),     LSFT(KC_U),     LSFT(KC_I),     LSFT(KC_O),     LSFT(KC_P),     FR_PIPE,        
     KC_TRANSPARENT, LSFT(FR_Q),     LSFT(KC_S),     LSFT(KC_D),     LSFT(KC_F),     LSFT(KC_G),     KC_TRANSPARENT,                                                                 KC_TRANSPARENT, LSFT(KC_H),     LSFT(KC_J),     LSFT(KC_K),     LSFT(KC_L),     LSFT(FR_M),     FR_DQUO,        
-    KC_TRANSPARENT, LSFT(KC_W),     LSFT(KC_X),     LSFT(KC_C),     LSFT(KC_V),     LSFT(KC_B),                                     LSFT(KC_N),     OSL(3),         FR_SCLN,        FR_COLN,        FR_QUES,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, LSFT(FR_W),     LSFT(KC_X),     LSFT(KC_C),     LSFT(KC_V),     LSFT(KC_B),                                     LSFT(KC_N),     OSL(3),         FR_SCLN,        FR_COLN,        FR_QUES,        KC_TRANSPARENT, 
     LSFT(KC_LCTRL), LSFT(KC_LGUI),  LSFT(KC_LALT),  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     UC(0xA0),     KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
