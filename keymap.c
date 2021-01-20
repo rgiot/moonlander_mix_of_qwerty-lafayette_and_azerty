@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TG(L_CAPS),    FR_Q,           KC_S,           KC_D,           KC_F,           KC_G,           KC_LSHIFT,                                                                      KC_TRANSPARENT, KC_H,           KC_J,           KC_K,           KC_L,           FR_M,           FR_APOS,        
     LM(L_SHIFT, LSFT(KC_NO)),    FR_W,    KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           OSL(L_EXTRA),   FR_COMM,        FR_DOT,         FR_SLSH,        LM(L_SHIFT, RSFT(KC_NO)),    
     KC_LCTRL,       KC_LGUI,        KC_LALT,        KC_LEFT,        KC_RIGHT,       LALT_T(KC_APPLICATION),                                                                                                LCTL_T(KC_ESCAPE),KC_UP,          KC_DOWN,        FR_LCBR,        FR_RCBR,        KC_RCTRL,       
-    KC_SPACE,       KC_BSPACE,      KC_DELETE,                      TT(4),          KC_TAB,         KC_ENTER
+    KC_SPACE,       KC_BSPACE,      KC_DELETE,                      TT(L_ALTGR),          KC_TAB,         KC_ENTER
   ),
 
   // Keys with shift
