@@ -24,6 +24,9 @@
 #include "keymap_estonian.h"
 #include "keymap_belgian.h"
 #include "keymap_us_international.h"
+#include "sendstring_french.h"
+
+
 
 #define KC_MAC_UNDO LGUI(KC_Z)
 #define KC_MAC_CUT LGUI(KC_X)
@@ -61,17 +64,16 @@ enum layer_semantic {
   L_ALTGR,
   L_SYMBOLS,
   L_MEDIA,
-
-
 };
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Standard layout
   [L_BASE] = LAYOUT_moonlander(
     KC_GRAVE,       FR_1,           FR_2,           FR_3,           FR_4,           FR_5,           TG(L_SYMBOLS),                                  KC_EQUAL,       FR_6,           FR_7,           FR_8,           FR_9,           FR_0,           FR_MINS,        
     KC_TAB,         FR_A,           FR_Z,           KC_E,           KC_R,           KC_T,           FR_CCIRC,                                       FR_UMLT,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           FR_BSLS,        
-    TG(L_CAPS),    FR_Q,           KC_S,           KC_D,           KC_F,           KC_G,           KC_LSHIFT,                                                                      KC_TRANSPARENT, KC_H,           KC_J,           KC_K,           KC_L,           FR_M,           FR_APOS,        
-    LM(L_SHIFT, LSFT(KC_NO)),    FR_W,    KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           OSL(L_EXTRA),   FR_COMM,        FR_DOT,         FR_SLSH,        LM(L_SHIFT, RSFT(KC_NO)),    
+    TG(L_CAPS),    FR_Q,           KC_S,           KC_D,           KC_F,           KC_G,           KC_LSHIFT,                                                                      KC_LEAD, KC_H,           KC_J,           KC_K,           KC_L,           FR_M,           FR_APOS,        
+    MO(L_SHIFT),    FR_W,    KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           OSL(L_EXTRA),   FR_COMM,        FR_DOT,         FR_SLSH,        LT(L_SHIFT, KC_RSFT),    
     KC_LCTRL,       KC_LGUI,        KC_LALT,        KC_LEFT,        KC_RIGHT,       LALT_T(KC_APPLICATION),                                                                                                LCTL_T(KC_ESCAPE),KC_UP,          KC_DOWN,        FR_LCBR,        FR_RCBR,        KC_RCTRL,       
     KC_SPACE,       KC_BSPACE,      KC_DELETE,                      TT(L_ALTGR),          KC_TAB,         KC_ENTER
   ),
@@ -260,4 +262,36 @@ void keyboard_post_init_user(void) {
 
   set_unicode_input_mode(UC_LNX);
   rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+}
+
+
+
+bool did_leader_succeed;
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    did_leader_succeed = leading = false;
+
+    SEQ_ONE_KEY(KC_E) {
+      // Anything you can do in a macro.
+      SEND_STRING(SS_LCTL(SS_LSFT("t")));
+      did_leader_succeed = true;
+    } else 
+    SEQ_TWO_KEYS(KC_G, KC_C) {
+      SEND_STRING("git commit -m \"\"" SS_TAP(X_LEFT));
+      did_leader_succeed = true;
+    } else 
+    SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
+      SEND_STRING("git commit -a -m \"\"" SS_TAP(X_LEFT));
+      did_leader_succeed = true;
+    }
+    leader_end();
+  }
+}
+
+void leader_start(void) {
+}
+
+void leader_end(void) {
 }
