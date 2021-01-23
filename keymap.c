@@ -295,8 +295,13 @@ void matrix_scan_user(void) {
       SEND_STRING("git commit -m \"\"" SS_TAP(X_LEFT));
       did_leader_succeed = true;
     } else 
-    SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
-      SEND_STRING("git commit -a -m \"\"" SS_TAP(X_LEFT));
+    SEQ_THREE_KEYS(KC_G, KC_P, KC_L) {
+      SEND_STRING("git pull");
+      did_leader_succeed = true;
+    }
+    else 
+    SEQ_THREE_KEYS(KC_G, KC_P, KC_S) {
+      SEND_STRING("git push");
       did_leader_succeed = true;
     }
     SEQ_THREE_KEYS(KC_R, KC_E, KC_S) {
