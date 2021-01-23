@@ -3,9 +3,11 @@
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 
-AUTO_SHIFT_ENABLE = yes
+AUTO_SHIFT_ENABLE = no
+
 UNICODE_ENABLE = yes
 LEADER_ENABLE = yes
+FRENCH_ENABLE=yes
 
 SRC = matrix.c 
 EXTRAFLAGS+=--specs=nosys.specs
